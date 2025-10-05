@@ -268,6 +268,18 @@ public protocol MovieService: Sendable {
     ///
     func externalLinks(forMovie movieID: Movie.ID) async throws -> MovieExternalLinksCollection
 
+    ///
+    /// Returns a collection of translations that have been created for a movie.
+    ///
+    /// [TMDb API - Movie: Translations](https://developer.themoviedb.org/reference/movie-translations)
+    ///
+    /// - Parameter movieID: The identifier of the movie.
+    ///
+    /// - Throws: TMDb data error ``TMDbError``.
+    ///
+    /// - Returns: A collection of translations for the specificed movie.
+    ///
+    func translations(forMovie movieID: Movie.ID) async throws -> TranslationsCollection<Movie>
 }
 
 extension MovieService {

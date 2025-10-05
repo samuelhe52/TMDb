@@ -231,4 +231,17 @@ final class TMDbMovieService: MovieService {
         return linksCollection
     }
 
+    func translations(forMovie movieID: Movie.ID) async throws -> TranslationsCollection<Movie> {
+        let request = MovieTranslationsRequest(id: movieID)
+
+        let translationsCollection: TranslationsCollection<Movie>
+        do {
+            translationsCollection = try await apiClient.perform(request)
+        } catch let error {
+            throw TMDbError(error: error)
+        }
+
+        return translationsCollection
+    }
+
 }
