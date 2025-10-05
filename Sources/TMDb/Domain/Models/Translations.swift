@@ -25,14 +25,14 @@
 public struct Translations: Codable, Equatable, Hashable, Sendable {
     
     ///
-    /// The ISO 639-1 code of the language.
+    /// The ISO 639-1 language code.
     ///
-    public let iso639_1: String
+    public let languageCode: String
     
     ///
-    /// The ISO 3166-1 code of the country.
+    /// The ISO 3166-1 country code.
     ///
-    public let iso3166_1: String
+    public let countryCode: String
     
     ///
     /// The name of the language.
@@ -48,15 +48,40 @@ public struct Translations: Codable, Equatable, Hashable, Sendable {
     /// The translation data.
     ///
     public let data: TranslationData
+
+    ///
+    /// Creates a translations object.
+    ///
+    /// - Parameters:
+    ///    - languageCode: ISO 639-1 language code.
+    ///    - countryCode: ISO 3166-1 country code.
+    ///    - name: Language name.
+    ///    - englishName: English name of the language.
+    ///    - data: Translation data.
+    ///
+    public init(
+        languageCode: String,
+        countryCode: String,
+        name: String,
+        englishName: String,
+        data: TranslationData
+    ) {
+        self.languageCode = languageCode
+        self.countryCode = countryCode
+        self.name = name
+        self.englishName = englishName
+        self.data = data
+    }
 }
 
 extension Translations {
+
     private enum CodingKeys: String, CodingKey {
-        case iso639_1 = "iso_639_1"
-        case iso3166_1 = "iso_3166_1"
+        case languageCode = "iso_639_1"
+        case countryCode = "iso_3166_1"
         case name
         case englishName = "english_name"
-        case data = "data"
+        case data
     }
 
 
@@ -74,16 +99,16 @@ extension Translations {
     ///
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        let iso639_1 = try container.decode(String.self, forKey: .iso639_1)
-        let iso3166_1 = try container.decode(String.self, forKey: .iso3166_1)
+
+        let languageCode = try container.decode(String.self, forKey: .languageCode)
+        let countryCode = try container.decode(String.self, forKey: .countryCode)
         let name = try container.decode(String.self, forKey: .name)
         let englishName = try container.decode(String.self, forKey: .englishName)
         let data = try container.decode(TranslationData.self, forKey: .data)
         
         self.init(
-            iso639_1: iso639_1,
-            iso3166_1: iso3166_1,
+            languageCode: languageCode,
+            countryCode: countryCode,
             name: name,
             englishName: englishName,
             data: data
@@ -106,9 +131,9 @@ extension Translations {
     ///
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        
-        try container.encode(iso639_1, forKey: .iso639_1)
-        try container.encode(iso3166_1, forKey: .iso3166_1)
+
+        try container.encode(languageCode, forKey: .languageCode)
+        try container.encode(countryCode, forKey: .countryCode)
         try container.encode(name, forKey: .name)
         try container.encode(englishName, forKey: .englishName)
         try container.encode(data, forKey: .data)
@@ -129,9 +154,23 @@ public struct TranslationData: Codable, Equatable, Hashable, Sendable {
     /// The overview in the specified language.
     ///
     public let overview: String?
+
+    ///
+    /// Creates a translation data object.
+    ///
+    /// - Parameters:
+    ///    - name: The title/name in the specified language.
+    ///    - overview: The overview in the specified language.
+    ///
+    public init(name: String?, overview: String?) {
+        self.name = name
+        self.overview = overview
+    }
+
 }
 
 extension TranslationData {
+
     private enum CodingKeys: String, CodingKey {
         case name
         case title
@@ -182,4 +221,5 @@ extension TranslationData {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(overview, forKey: .overview)
     }
+
 }
