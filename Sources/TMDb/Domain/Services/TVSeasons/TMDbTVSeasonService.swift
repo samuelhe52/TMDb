@@ -112,4 +112,20 @@ final class TMDbTVSeasonService: TVSeasonService {
         return videoCollection
     }
 
+    func translations(
+        forSeason seasonNumber: Int,
+        inTVSeries tvSeriesID: TVSeries.ID
+    ) async throws -> TranslationsCollection<TVSeason> {
+        let request = TVSeasonTranslationsRequest(seasonNumber: seasonNumber, tvSeriesID: tvSeriesID)
+
+        let translationsCollection: TranslationsCollection<TVSeason>
+        do {
+            translationsCollection = try await apiClient.perform(request)
+        } catch let error {
+            throw TMDbError(error: error)
+        }
+
+        return translationsCollection
+    }
+
 }

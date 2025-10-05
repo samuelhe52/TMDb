@@ -250,6 +250,19 @@ public protocol TVSeriesService: Sendable {
         forTVSeries tvSeriesID: TVSeries.ID,
         country: String
     ) async throws -> ContentRating?
+
+    ///
+    /// Returns a collection of translations that have been created for a TV series.
+    ///
+    /// [TMDb API - TV Series: Translations](https://developer.themoviedb.org/reference/tv-series-translations)
+    ///
+    /// - Parameter tvSeriesID: The identifier of the TV series.
+    ///
+    /// - Throws: TMDb data error ``TMDbError``.
+    ///
+    /// - Returns: A collection of translations for the specificed TV series.
+    ///
+    func translations(forTVSeries tvSeriesID: TVSeries.ID) async throws -> TranslationsCollection<TVSeries>
 }
 
 extension TVSeriesService {
@@ -494,6 +507,21 @@ extension TVSeriesService {
         country: String = "US"
     ) async throws -> ContentRating? {
         try await contentRatings(forTVSeries: tvSeriesID, country: country)
+    }
+
+    ///
+    /// Returns a collection of translations that have been created for a TV series.
+    ///
+    /// [TMDb API - TV Series: Translations](https://developer.themoviedb.org/reference/tv-series-translations)
+    ///
+    /// - Parameter tvSeriesID: The identifier of the TV series.
+    ///
+    /// - Throws: TMDb data error ``TMDbError``.
+    ///
+    /// - Returns: A collection of translations for the specificed TV series.
+    ///
+    public func translations(forTVSeries tvSeriesID: TVSeries.ID) async throws -> TranslationsCollection<TVSeries> {
+        try await translations(forTVSeries: tvSeriesID)
     }
 
 }

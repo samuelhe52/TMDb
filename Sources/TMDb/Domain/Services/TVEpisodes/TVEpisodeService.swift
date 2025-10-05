@@ -91,6 +91,26 @@ public protocol TVEpisodeService: Sendable {
         filter: TVEpisodeVideoFilter?
     ) async throws -> VideoCollection
 
+    ///
+    /// Returns a collection of translations that have been created for a TV episode.
+    ///
+    /// [TMDb API - TV Episode: Translations](https://developer.themoviedb.org/reference/tv-episode-translations)
+    ///
+    /// - Parameters:
+    ///    - episodeNumber: The episode number of a TV series.
+    ///    - seasonNumber: The season number of a TV series.
+    ///    - tvSeriesID: The identifier of the TV series.
+    ///
+    /// - Throws: TMDb data error ``TMDbError``.
+    ///
+    /// - Returns: A collection of translations for the specificed TV episode.
+    ///
+    func translations(
+        forEpisode episodeNumber: Int,
+        inSeason seasonNumber: Int,
+        inTVSeries tvSeriesID: TVSeries.ID
+    ) async throws -> TranslationsCollection<TVEpisode>
+
 }
 
 extension TVEpisodeService {
@@ -179,6 +199,32 @@ extension TVEpisodeService {
             inSeason: seasonNumber,
             inTVSeries: tvSeriesID,
             filter: filter
+        )
+    }
+
+    ///
+    /// Returns a collection of translations that have been created for a TV episode.
+    ///
+    /// [TMDb API - TV Episode: Translations](https://developer.themoviedb.org/reference/tv-episode-translations)
+    ///
+    /// - Parameters:
+    ///    - episodeNumber: The episode number of a TV series.
+    ///    - seasonNumber: The season number of a TV series.
+    ///    - tvSeriesID: The identifier of the TV series.
+    ///
+    /// - Throws: TMDb data error ``TMDbError``.
+    ///
+    /// - Returns: A collection of translations for the specificed TV episode.
+    ///
+    public func translations(
+        forEpisode episodeNumber: Int,
+        inSeason seasonNumber: Int,
+        inTVSeries tvSeriesID: TVSeries.ID
+    ) async throws -> TranslationsCollection<TVEpisode> {
+        try await translations(
+            forEpisode: episodeNumber,
+            inSeason: seasonNumber,
+            inTVSeries: tvSeriesID
         )
     }
 

@@ -109,6 +109,24 @@ public protocol TVSeasonService: Sendable {
         filter: TVSeasonVideoFilter?
     ) async throws -> VideoCollection
 
+    ///
+    /// Returns a collection of translations that have been created for a TV season.
+    ///
+    /// [TMDb API - TV Season: Translations](https://developer.themoviedb.org/reference/tv-season-translations)
+    ///
+    /// - Parameters:
+    ///    - seasonNumber: The season number of a TV series.
+    ///    - tvSeriesID: The identifier of the TV series.
+    ///
+    /// - Throws: TMDb data error ``TMDbError``.
+    ///
+    /// - Returns: A collection of translations for the specificed TV season.
+    ///
+    func translations(
+        forSeason seasonNumber: Int,
+        inTVSeries tvSeriesID: TVSeries.ID
+    ) async throws -> TranslationsCollection<TVSeason>
+
 }
 
 extension TVSeasonService {
@@ -204,6 +222,26 @@ extension TVSeasonService {
         filter: TVSeasonVideoFilter? = nil
     ) async throws -> VideoCollection {
         try await videos(forSeason: seasonNumber, inTVSeries: tvSeriesID, filter: filter)
+    }
+
+    ///
+    /// Returns a collection of translations that have been created for a TV season.
+    ///
+    /// [TMDb API - TV Season: Translations](https://developer.themoviedb.org/reference/tv-season-translations)
+    ///
+    /// - Parameters:
+    ///    - seasonNumber: The season number of a TV series.
+    ///    - tvSeriesID: The identifier of the TV series.
+    ///
+    /// - Throws: TMDb data error ``TMDbError``.
+    ///
+    /// - Returns: A collection of translations for the specificed TV season.
+    ///
+    public func translations(
+        forSeason seasonNumber: Int,
+        inTVSeries tvSeriesID: TVSeries.ID
+    ) async throws -> TranslationsCollection<TVSeason> {
+        try await translations(forSeason: seasonNumber, inTVSeries: tvSeriesID)
     }
 
 }
