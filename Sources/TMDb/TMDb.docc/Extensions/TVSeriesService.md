@@ -30,3 +30,5 @@
 
 - ``watchProviders(forTVSeries:country:)``
 - ``externalLinks(forTVSeries:)``
+- ``contentRatings(forTVSeries:country:)``
+- ``translations(forTVSeries:)``

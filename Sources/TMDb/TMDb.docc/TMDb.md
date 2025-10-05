@@ -61,6 +61,9 @@ Watch providers provided by [JustWatch](https://www.justwatch.com).
 - ``ImageCollection``
 - ``VideoCollection``
 - ``MovieExternalLinksCollection``
+- ``TranslationsCollection``
+- ``Translations``
+- ``TranslationData``
 - ``MoviePageableList``
 - ``MovieImageFilter``
 - ``MovieVideoFilter``
@@ -80,6 +83,9 @@ Watch providers provided by [JustWatch](https://www.justwatch.com).
 - ``ImageCollection``
 - ``VideoCollection``
 - ``TVSeriesExternalLinksCollection``
+- ``TranslationsCollection``
+- ``Translations``
+- ``TranslationData``
 - ``TVSeriesImageFilter``
 - ``TVSeriesVideoFilter``
 
@@ -89,6 +95,9 @@ Watch providers provided by [JustWatch](https://www.justwatch.com).
 - ``TVSeason``
 - ``TVSeasonImageCollection``
 - ``VideoCollection``
+- ``TranslationsCollection``
+- ``Translations``
+- ``TranslationData``
 - ``TVSeasonImageFilter``
 - ``TVSeasonVideoFilter``
 
@@ -98,6 +107,9 @@ Watch providers provided by [JustWatch](https://www.justwatch.com).
 - ``TVEpisode``
 - ``TVEpisodeImageCollection``
 - ``VideoCollection``
+- ``TranslationsCollection``
+- ``Translations``
+- ``TranslationData``
 - ``TVEpisodeImageFilter``
 - ``TVEpisodeVideoFilter``
 

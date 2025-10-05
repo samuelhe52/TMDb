@@ -14,3 +14,7 @@
 
 - ``images(forSeason:inTVSeries:filter:)``
 - ``videos(forSeason:inTVSeries:filter:)``
+
+### Other
+
+- ``translations(forSeason:inTVSeries:)``

@@ -10,3 +10,7 @@
 
 - ``images(forEpisode:inSeason:inTVSeries:filter:)``
 - ``videos(forEpisode:inSeason:inTVSeries:filter:)``
+
+### Other
+
+- ``translations(forEpisode:inSeason:inTVSeries:)``

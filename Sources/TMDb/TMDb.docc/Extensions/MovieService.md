@@ -32,3 +32,4 @@
 
 - ``watchProviders(forMovie:country:)``
 - ``externalLinks(forMovie:)``
+- ``translations(forMovie:)``
