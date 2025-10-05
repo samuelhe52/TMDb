@@ -94,4 +94,27 @@ struct TMDbTVSeriesServiceOthersTests {
         }
     }
 
+    @Test("translations returns translations collection")
+    func translationsReturnsTranslationsCollection() async throws {
+        let expectedResult = TranslationsCollection<TVSeries>.gameOfThrones
+        let tvSeriesID = 1399
+        apiClient.addResponse(.success(expectedResult))
+        let expectedRequest = TVSeriesTranslationsRequest(id: tvSeriesID)
+
+        let result = try await service.translations(forTVSeries: tvSeriesID)
+
+        #expect(result == expectedResult)
+        #expect(apiClient.lastRequest as? TVSeriesTranslationsRequest == expectedRequest)
+    }
+
+    @Test("translations when errors throws error")
+    func translationsWhenErrorsThrowsError() async throws {
+        let tvSeriesID = 1399
+        apiClient.addResponse(.failure(.unknown))
+
+        await #expect(throws: TMDbError.unknown) {
+            _ = try await service.translations(forTVSeries: tvSeriesID)
+        }
+    }
+
 }

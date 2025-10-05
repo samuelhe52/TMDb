@@ -233,4 +233,43 @@ struct TMDbTVEpisodeServiceTests {
         }
     }
 
+    @Test("translations returns translations collection")
+    func translationsReturnsTranslationsCollection() async throws {
+        let tvSeriesID = 1
+        let seasonNumber = 1
+        let episodeNumber = 1
+        let expectedResult = TranslationsCollection<TVEpisode>.mock
+        apiClient.addResponse(.success(expectedResult))
+        let expectedRequest = TVEpisodeTranslationsRequest(
+            episodeNumber: episodeNumber,
+            seasonNumber: seasonNumber,
+            tvSeriesID: tvSeriesID
+        )
+
+        let result = try await service.translations(
+            forEpisode: episodeNumber,
+            inSeason: seasonNumber,
+            inTVSeries: tvSeriesID
+        )
+
+        #expect(result == expectedResult)
+        #expect(apiClient.lastRequest as? TVEpisodeTranslationsRequest == expectedRequest)
+    }
+
+    @Test("translations when errors throws error")
+    func translationsWhenErrorsThrowsError() async throws {
+        let tvSeriesID = 1
+        let seasonNumber = 1
+        let episodeNumber = 1
+        apiClient.addResponse(.failure(.unknown))
+
+        await #expect(throws: TMDbError.unknown) {
+            _ = try await service.translations(
+                forEpisode: episodeNumber,
+                inSeason: seasonNumber,
+                inTVSeries: tvSeriesID
+            )
+        }
+    }
+
 }

@@ -98,4 +98,27 @@ struct TMDbMovieServiceOthersTests {
         }
     }
 
+    @Test("translations returns translations collection")
+    func translationsReturnsTranslationsCollection() async throws {
+        let expectedResult = TranslationsCollection<Movie>.avengers
+        let movieID = 24428
+        apiClient.addResponse(.success(expectedResult))
+        let expectedRequest = MovieTranslationsRequest(id: movieID)
+
+        let result = try await service.translations(forMovie: movieID)
+
+        #expect(result == expectedResult)
+        #expect(apiClient.lastRequest as? MovieTranslationsRequest == expectedRequest)
+    }
+
+    @Test("translations when errors throws error")
+    func translationsWhenErrorsThrowsError() async throws {
+        let movieID = 24428
+        apiClient.addResponse(.failure(.unknown))
+
+        await #expect(throws: TMDbError.unknown) {
+            _ = try await service.translations(forMovie: movieID)
+        }
+    }
+
 }

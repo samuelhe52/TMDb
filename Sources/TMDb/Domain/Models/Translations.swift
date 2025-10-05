@@ -19,6 +19,8 @@
 //  limitations under the License.
 //
 
+import Foundation
+
 ///
 /// A model representing translations for an item.
 /// 
@@ -77,10 +79,10 @@ public struct Translations: Codable, Equatable, Hashable, Sendable {
 extension Translations {
 
     private enum CodingKeys: String, CodingKey {
-        case languageCode = "iso_639_1"
-        case countryCode = "iso_3166_1"
+        case languageCode = "iso6391"
+        case countryCode = "iso31661"
         case name
-        case englishName = "english_name"
+        case englishName
         case data
     }
 
