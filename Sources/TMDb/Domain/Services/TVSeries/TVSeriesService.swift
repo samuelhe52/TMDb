@@ -262,7 +262,9 @@ public protocol TVSeriesService: Sendable {
     ///
     /// - Returns: A collection of translations for the specificed TV series.
     ///
-    func translations(forTVSeries tvSeriesID: TVSeries.ID) async throws -> TranslationsCollection<TVSeries>
+    func translations(
+        forTVSeries tvSeriesID: TVSeries.ID
+    ) async throws -> TranslationsCollection<TVSeries>
 }
 
 extension TVSeriesService {
@@ -520,7 +522,9 @@ extension TVSeriesService {
     ///
     /// - Returns: A collection of translations for the specificed TV series.
     ///
-    public func translations(forTVSeries tvSeriesID: TVSeries.ID) async throws -> TranslationsCollection<TVSeries> {
+    public func translations(
+        forTVSeries tvSeriesID: TVSeries.ID
+    ) async throws -> TranslationsCollection<TVSeries> {
         try await translations(forTVSeries: tvSeriesID)
     }
 

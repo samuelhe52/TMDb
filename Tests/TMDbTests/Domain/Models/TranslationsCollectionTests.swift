@@ -41,7 +41,9 @@ struct TranslationsCollectionTests {
         #expect(result.translations[0].name == "English")
         #expect(result.translations[0].englishName == "English")
         #expect(result.translations[0].data.name == "The Avengers")
-        #expect(result.translations[0].data.overview?.starts(with: "When an unexpected enemy") == true)
+        #expect(
+            result.translations[0].data.overview?.starts(with: "When an unexpected enemy") == true
+        )
     }
 
     @Test("decode returns TranslationsCollection for TV series")

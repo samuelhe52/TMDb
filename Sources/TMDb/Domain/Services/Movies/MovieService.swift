@@ -564,7 +564,9 @@ extension MovieService {
     ///
     /// - Returns: A collection of translations for the specificed movie.
     ///
-    public func translations(forMovie movieID: Movie.ID) async throws -> TranslationsCollection<Movie> {
+    public func translations(
+        forMovie movieID: Movie.ID
+    ) async throws -> TranslationsCollection<Movie> {
         try await translations(forMovie: movieID)
     }
 }

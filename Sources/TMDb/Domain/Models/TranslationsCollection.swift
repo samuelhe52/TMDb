@@ -3,7 +3,7 @@
 //  TMDb
 //
 //  Copyright © 2025 Adam Young.
-//  
+//
 //  Created by Samuel He on 2025/10/05.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -71,7 +71,7 @@ extension TranslationsCollection {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let id = try container.decode(Item.ID.self, forKey: .id)
         let translations = try container.decode([Translations].self, forKey: .translations)
-        
+
         self.init(id: id, translations: translations)
     }
 

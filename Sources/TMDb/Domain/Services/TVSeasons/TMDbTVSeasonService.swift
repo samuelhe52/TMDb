@@ -116,7 +116,10 @@ final class TMDbTVSeasonService: TVSeasonService {
         forSeason seasonNumber: Int,
         inTVSeries tvSeriesID: TVSeries.ID
     ) async throws -> TranslationsCollection<TVSeason> {
-        let request = TVSeasonTranslationsRequest(seasonNumber: seasonNumber, tvSeriesID: tvSeriesID)
+        let request = TVSeasonTranslationsRequest(
+            seasonNumber: seasonNumber,
+            tvSeriesID: tvSeriesID
+        )
 
         let translationsCollection: TranslationsCollection<TVSeason>
         do {

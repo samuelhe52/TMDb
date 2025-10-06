@@ -23,29 +23,29 @@ import Foundation
 
 ///
 /// A model representing translations for an item.
-/// 
+///
 public struct Translations: Codable, Equatable, Hashable, Sendable {
-    
+
     ///
     /// The ISO 639-1 language code.
     ///
     public let languageCode: String
-    
+
     ///
     /// The ISO 3166-1 country code.
     ///
     public let countryCode: String
-    
+
     ///
     /// The name of the language.
     ///
     public let name: String
-    
+
     ///
     /// The English name of the language.
     ///
     public let englishName: String
-    
+
     ///
     /// The translation data.
     ///
@@ -86,7 +86,6 @@ extension Translations {
         case data
     }
 
-
     ///
     /// Creates a new instance by decoding from the given decoder.
     ///
@@ -107,7 +106,7 @@ extension Translations {
         let name = try container.decode(String.self, forKey: .name)
         let englishName = try container.decode(String.self, forKey: .englishName)
         let data = try container.decode(TranslationData.self, forKey: .data)
-        
+
         self.init(
             languageCode: languageCode,
             countryCode: countryCode,
@@ -193,12 +192,13 @@ extension TranslationData {
     ///
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         // Try to decode 'name' first, fall back to 'title' if not present
-        let name = try container.decodeIfPresent(String.self, forKey: .name) 
+        let name =
+            try container.decodeIfPresent(String.self, forKey: .name)
             ?? container.decodeIfPresent(String.self, forKey: .title)
         let overview = try container.decodeIfPresent(String.self, forKey: .overview)
-        
+
         self.init(name: name, overview: overview)
     }
 
@@ -218,7 +218,7 @@ extension TranslationData {
     ///
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        
+
         // Encode as 'name' for consistency
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(overview, forKey: .overview)
